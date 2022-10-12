@@ -10,11 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 IEdmModel modelV1;
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 builder.Services.AddControllers()
     .AddOData(options => options
         .Select()
+        .Expand()
         .AddRouteComponents("v1", EdmModelBuilder.GetModelV1()));
         // .AddNewtonsoftJson()
         // .AddODataNewtonsoftJson();

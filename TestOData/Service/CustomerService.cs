@@ -1,9 +1,19 @@
+using TestOData.Controllers;
 using TestOData.Model;
 
 namespace TestOData.Service;
 
 public sealed class CustomerService : ICustomerService
 {
+    private readonly IHttpContextAccessor _context;
+    private readonly LinkGenerator _linkGenerator;
+
+    public CustomerService(IHttpContextAccessor context, LinkGenerator linkGenerator)
+    {
+        _context = context;
+        _linkGenerator = linkGenerator;
+    }
+    
     public IEnumerable<Customer> GetCustomers()
     {
         yield return new Customer
@@ -14,16 +24,13 @@ public sealed class CustomerService : ICustomerService
             Department = new Department
             {
                 Id = 1,
-                Name = "Sales"
+                Name = "Sales",
+                Label = _linkGenerator.GetUriByName(_context.HttpContext, ResourcesController.GetContentEndpoint, new { label = "Sales" })
             },
             Address = new Address
             {
                 City = "Paris",
                 Street = "rue de Paradis"
-            },
-            Dep = new DepartmentDTO
-            {
-                Name = "Sales"
             }
         };
         
@@ -35,16 +42,13 @@ public sealed class CustomerService : ICustomerService
             Department = new Department
             {
                 Id = 2,
-                Name = "IT"
+                Name = "IT",
+                Label = _linkGenerator.GetUriByName(_context.HttpContext, ResourcesController.GetContentEndpoint, new { label = "IT" })
             },
             Address = new Address
             {
                 City = "Lyon",
                 Street = "rue de la Madelain"
-            },
-            Dep = new DepartmentDTO
-            {
-                Name = "IT"
             }
         };
         
@@ -56,16 +60,13 @@ public sealed class CustomerService : ICustomerService
             Department = new Department
             {
                 Id = 1,
-                Name = "Sales"
+                Name = "Sales",
+                Label = _linkGenerator.GetUriByName(_context.HttpContext, ResourcesController.GetContentEndpoint, new { label = "Sales" })
             },
             Address = new Address
             {
                 City = "Lille",
                 Street = "rue de la clef"
-            },
-            Dep = new DepartmentDTO
-            {
-                Name = "Sales"
             }
         };
     }
