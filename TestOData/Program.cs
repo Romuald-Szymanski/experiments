@@ -14,11 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddSingleton<IODataSerializerProvider, IgnoreNullEntityPropertiesSerializerProvider>();
 builder.Services.AddControllers()
     .AddOData(options =>
-        {
-            options.AddRouteComponents("v1", EdmModelBuilder.GetModelV1()).Select().Expand();
+    {
+        options
+            .Select()
+            .Expand()
+            .AddRouteComponents(
+                "v1",
+                EdmModelBuilder.GetModelV1(),
+                svc => svc.AddSingleton<ODataResourceSerializer, OmitNullResourceSerializer>());
             options.RouteOptions.EnableControllerNameCaseInsensitive = true;
         });
         // .AddNewtonsoftJson(setup => setup.UseCamelCasing(true))

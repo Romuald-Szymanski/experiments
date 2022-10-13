@@ -9,12 +9,8 @@ public static class EdmModelBuilder
     { 
         ODataConventionModelBuilder builder = new();
         builder.EntitySet<Customer>("Customers");   // besoin d'un CustomersController
-        // builder.EntitySet<Department>("Departments");
+        builder.EntitySet<Department>("Departments");
         builder.EnableLowerCamelCase();
-
-        var eType = builder.AddEntityType(typeof(Department));
-        eType.AddedExplicitly = false;
-        
         return builder.GetEdmModel();
     }
 }
