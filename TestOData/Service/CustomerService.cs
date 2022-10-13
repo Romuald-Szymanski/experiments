@@ -31,9 +31,24 @@ public sealed class CustomerService : ICustomerService
             {
                 City = "Paris",
                 Street = "rue de Paradis"
+            },
+            Types = new CustomerType
+            {
+                TypesDictionary = new Dictionary<string, object>
+                {
+                    { "Type1", "Valeur1"},
+                    { "Type2", "Valeur2"}
+                }
             }
+            // Types = new Dictionary<string, object>
+            // {
+            //     { "Type1", "Valeur1"},
+            //     { "Type2", "Valeur2"}
+            // }
         };
         
+        yield break;
+
         yield return new Customer
         {
             Id = 2,
@@ -49,7 +64,8 @@ public sealed class CustomerService : ICustomerService
             {
                 City = "Lyon",
                 Street = "rue de la Madelain"
-            }
+            },
+            Age = 25
         };
         
         yield return new Customer
@@ -62,11 +78,6 @@ public sealed class CustomerService : ICustomerService
                 Id = 1,
                 Name = "Sales",
                 Label = _linkGenerator.GetUriByName(_context.HttpContext, ResourcesController.GetContentEndpoint, new { label = "Sales" })
-            },
-            Address = new Address
-            {
-                City = "Lille",
-                Street = "rue de la clef"
             }
         };
     }
