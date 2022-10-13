@@ -31,6 +31,14 @@ public sealed class CustomerService : ICustomerService
             {
                 City = "Paris",
                 Street = "rue de Paradis"
+            },
+            Types = new CustomerType
+            {
+                Types = new Dictionary<string, object>
+                {
+                    { "Type1", "Valeur1"},
+                    { "Type2", "Valeur2"}
+                }
             }
         };
         
@@ -49,7 +57,8 @@ public sealed class CustomerService : ICustomerService
             {
                 City = "Lyon",
                 Street = "rue de la Madelain"
-            }
+            },
+            Test = 25
         };
         
         yield return new Customer

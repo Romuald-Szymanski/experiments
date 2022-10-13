@@ -17,7 +17,7 @@ public sealed class CustomersController : ControllerBase
     }
 
     [HttpGet]
-    [EnableQuery]
+    // [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.Apply)]
     public IActionResult Get()
     {
         Customer[] customers = _customerService.GetCustomers().ToArray();

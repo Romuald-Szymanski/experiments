@@ -7,4 +7,6 @@ public sealed class Customer
     public Color FavoriteColor { get; set; }
     public Department Department { get; set; }
     public Address Address { get; set; }
+    public CustomerType Types { get; set; }
+    public Int64? Test { get; set; }
 }

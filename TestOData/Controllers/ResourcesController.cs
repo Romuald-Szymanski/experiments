@@ -16,6 +16,15 @@ public class ResourcesController : ControllerBase
     [Route("content/{label}", Name = GetContentEndpoint)]
     public IActionResult Index(string label)
     {
-        return Ok($"label is {label}");
+        Content content = new()
+        {
+            Label = $"label is {label}"
+        };
+        return Ok(content);
     }
+}
+
+public sealed class Content
+{
+    public String Label { get; set; }
 }
